@@ -4,8 +4,7 @@ This is version contains fixes fro Apple MacOS with M2 chipset (Build tested upt
 - include fixes for VxWidgets 3.2
 - fixes for arm64 architecture
   
-Typical configure & build for M2 MacOS
---------------------------------------
+**Typical configure & build for M2 MacOS**
 ```
 $ ./configure --with-wx-version=3.2  --with-arch-arm64 --enable-appbundle --with-pgsql=<path to postgres> --with-libssl-prefix=<path to openssl lib>
 $ make
