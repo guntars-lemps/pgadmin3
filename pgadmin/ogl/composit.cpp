@@ -136,12 +136,7 @@ void wxCompositeShape::OnDragLeft(bool WXUNUSED(draw), double x, double y, int W
 	GetCanvas()->PrepareDC(dc);
 
 	dc.SetLogicalFunction(OGLRBLF);
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	wxPen dottedPen(wxColour(0, 0, 0), 1, wxPENSTYLE_DOT);
-#else
 	wxPen dottedPen(wxColour(0, 0, 0), 1, wxDOT);
-#endif
 	dc.SetPen(dottedPen);
 	dc.SetBrush((* wxTRANSPARENT_BRUSH));
 
@@ -161,12 +156,7 @@ void wxCompositeShape::OnBeginDragLeft(double x, double y, int WXUNUSED(keys), i
 
 	dc.SetLogicalFunction(OGLRBLF);
 
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	wxPen dottedPen(wxColour(0, 0, 0), 1, wxPENSTYLE_DOT);
-#else
 	wxPen dottedPen(wxColour(0, 0, 0), 1, wxDOT);
-#endif
 	dc.SetPen(dottedPen);
 	dc.SetBrush((* wxTRANSPARENT_BRUSH));
 	m_canvas->CaptureMouse();

@@ -110,16 +110,6 @@ public:
 	{
 		volatility = s;
 	}
-////ABDUL:23 Jul 2021:BEGIN
-	wxString GetParallel() const
-	{
-		return parallel;
-	}
-	void iSetParallel(const wxString &s)
-	{
-		parallel = s;
-	}
-////ABDUL:23 Jul 2021:END
 	wxString GetSource() const
 	{
 		return source;
@@ -262,9 +252,6 @@ protected:
 
 private:
 	wxString returnType, language, volatility, source, bin;
-////ABDUL:23 Jul 2021:BEGIN
-	wxString parallel;
-////ABDUL:23 Jul 2021:END
 	wxArrayString argNamesArray, argTypesArray, argModesArray, argDefsArray;
 	bool returnAsSet, secureDefiner, isStrict, isWindow, isLeakProof;
 	long argCount, cost, rows, argDefValCount, procType;

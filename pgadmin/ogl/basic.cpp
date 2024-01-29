@@ -1240,12 +1240,7 @@ void wxShape::OnDragLeft(bool draw, double x, double y, int keys, int attachment
 
 	dc.SetLogicalFunction(OGLRBLF);
 
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	wxPen dottedPen(wxColour(0, 0, 0), 1, wxPENSTYLE_DOT);
-#else
 	wxPen dottedPen(wxColour(0, 0, 0), 1, wxDOT);
-#endif
 	dc.SetPen(dottedPen);
 	dc.SetBrush(* wxTRANSPARENT_BRUSH);
 
@@ -1287,12 +1282,7 @@ void wxShape::OnBeginDragLeft(double x, double y, int keys, int attachment)
 //  m_xpos = xx; m_ypos = yy;
 	dc.SetLogicalFunction(OGLRBLF);
 
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	wxPen dottedPen(wxColour(0, 0, 0), 1, wxPENSTYLE_DOT);
-#else
 	wxPen dottedPen(wxColour(0, 0, 0), 1, wxDOT);
-#endif
 	dc.SetPen(dottedPen);
 	dc.SetBrush((* wxTRANSPARENT_BRUSH));
 
@@ -1631,12 +1621,7 @@ void wxShape::WriteAttributes(wxExpr *clause)
 		int penStyle = m_pen->GetStyle();
 		if (penWidth != 1)
 			clause->AddAttributeValue(wxT("pen_width"), (long)penWidth);
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-		if (penStyle != wxPENSTYLE_SOLID)
-#else
 		if (penStyle != wxSOLID)
-#endif
 			clause->AddAttributeValue(wxT("pen_style"), (long)penStyle);
 
 		wxString penColour = wxTheColourDatabase->FindName(m_pen->GetColour());
@@ -1662,12 +1647,8 @@ void wxShape::WriteAttributes(wxExpr *clause)
 		}
 		else if (brushColour != wxT("WHITE"))
 			clause->AddAttributeValueString(wxT("brush_colour"), brushColour);
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-		if (m_brush->GetStyle() != wxBRUSHSTYLE_SOLID)
-#else
+
 		if (m_brush->GetStyle() != wxSOLID)
-#endif
 			clause->AddAttributeValue(wxT("brush_style"), (long)m_brush->GetStyle());
 	}
 
@@ -1873,14 +1854,8 @@ void wxShape::ReadAttributes(wxExpr *clause)
 	wxString pen_string = wxEmptyString;
 	wxString brush_string = wxEmptyString;
 	int pen_width = 1;
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	int pen_style = wxPENSTYLE_SOLID;
-	int brush_style = wxBRUSHSTYLE_SOLID;
-#else
 	int pen_style = wxSOLID;
 	int brush_style = wxSOLID;
-#endif
 	m_attachmentMode = ATTACHMENT_MODE_NONE;
 
 	clause->GetAttributeValue(wxT("pen_colour"), pen_string);
@@ -2042,12 +2017,7 @@ void wxShape::ReadRegions(wxExpr *clause)
 		int fontWeight = wxNORMAL;
 		wxString regionTextColour = wxEmptyString;
 		wxString penColour = wxEmptyString;
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-		int penStyle = wxPENSTYLE_SOLID;
-#else
 		int penStyle = wxSOLID;
-#endif
 
 		if (regionExpr->Type() == wxExprList)
 		{
@@ -3229,12 +3199,7 @@ wxPen wxShape::GetBackgroundPen()
 	if (GetCanvas())
 	{
 		wxColour c = GetCanvas()->GetBackgroundColour();
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-		return wxPen(c, 1, wxPENSTYLE_SOLID);
-#else
 		return wxPen(c, 1, wxSOLID);
-#endif
 	}
 	return * g_oglWhiteBackgroundPen;
 }
@@ -3245,12 +3210,7 @@ wxBrush wxShape::GetBackgroundBrush()
 	if (GetCanvas())
 	{
 		wxColour c = GetCanvas()->GetBackgroundColour();
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-		return wxBrush(c, wxBRUSHSTYLE_SOLID);
-#else
 		return wxBrush(c, wxSOLID);
-#endif
 	}
 	return * g_oglWhiteBackgroundBrush;
 }

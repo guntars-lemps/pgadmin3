@@ -20,6 +20,7 @@
 #include "ctlSQLGrid.h"
 #include "frm/frmExport.h"
 
+
 #define CTLSQL_RUNNING 100  // must be greater than ExecStatusType PGRES_xxx values
 
 class ctlSQLResult : public ctlSQLGrid

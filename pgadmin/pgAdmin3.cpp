@@ -845,7 +845,9 @@ int pgAdmin3::OnExit()
 	WSACleanup();
 #endif
 
-	wxTheClipboard->Flush();
+	if (wxTheClipboard->IsOpened()) {
+        wxTheClipboard->Flush();
+    }
 
 	return 1;
 }
@@ -1753,12 +1755,7 @@ void pgAdmin3::InitXml()
 	wxLogInfo(__("Using external XRC files."));
 
 	// for debugging, dialog resources are read from file
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	wxXmlResource::Get()->Load(uiPath + wxT("/3.1/*.xrc"));
-#else
-	wxXmlResource::Get()->Load(uiPath + wxT("/old/*.xrc"));
-#endif
+	wxXmlResource::Get()->Load(uiPath + wxT("/*.xrc"));
 #endif
 
 }

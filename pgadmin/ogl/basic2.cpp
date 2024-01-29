@@ -1284,12 +1284,7 @@ void wxShape::OnSizingDragLeft(wxControlPoint *pt, bool WXUNUSED(draw), double x
 
 	dc.SetLogicalFunction(OGLRBLF);
 
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	wxPen dottedPen(wxColour(0, 0, 0), 1, wxPENSTYLE_DOT);
-#else
 	wxPen dottedPen(wxColour(0, 0, 0), 1, wxDOT);
-#endif
 	dc.SetPen(dottedPen);
 	dc.SetBrush((* wxTRANSPARENT_BRUSH));
 
@@ -1422,12 +1417,8 @@ void wxShape::OnSizingBeginDragLeft(wxControlPoint *pt, double x, double y, int 
 	// We may require the old width and height.
 	pt->sm_controlPointDragStartWidth = bound_x;
 	pt->sm_controlPointDragStartHeight = bound_y;
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	wxPen dottedPen(wxColour(0, 0, 0), 1, wxPENSTYLE_DOT);
-#else
+
 	wxPen dottedPen(wxColour(0, 0, 0), 1, wxDOT);
-#endif
 	dc.SetPen(dottedPen);
 	dc.SetBrush((* wxTRANSPARENT_BRUSH));
 
@@ -1619,12 +1610,7 @@ void wxPolygonShape::OnSizingDragLeft(wxControlPoint *pt, bool WXUNUSED(draw), d
 
 	dc.SetLogicalFunction(OGLRBLF);
 
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	wxPen dottedPen(wxColour(0, 0, 0), 1, wxPENSTYLE_DOT);
-#else
 	wxPen dottedPen(wxColour(0, 0, 0), 1, wxDOT);
-#endif
 	dc.SetPen(dottedPen);
 	dc.SetBrush((* wxTRANSPARENT_BRUSH));
 
@@ -1676,12 +1662,7 @@ void wxPolygonShape::OnSizingBeginDragLeft(wxControlPoint *pt, double x, double 
 
 	if (ppt->m_originalDistance == 0.0) ppt->m_originalDistance = (double) 0.0001;
 
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	wxPen dottedPen(wxColour(0, 0, 0), 1, wxPENSTYLE_DOT);
-#else
 	wxPen dottedPen(wxColour(0, 0, 0), 1, wxDOT);
-#endif
 	dc.SetPen(dottedPen);
 	dc.SetBrush((* wxTRANSPARENT_BRUSH));
 
@@ -1765,12 +1746,7 @@ wxShapeRegion::wxShapeRegion()
 	m_regionName = wxEmptyString;
 	m_textColour = wxT("BLACK");
 	m_penColour = wxT("BLACK");
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	m_penStyle = wxPENSTYLE_SOLID;
-#else
 	m_penStyle = wxSOLID;
-#endif
 	m_actualPenObject = NULL;
 }
 
@@ -1897,12 +1873,7 @@ wxPen *wxShapeRegion::GetActualPen()
 	if (!m_penColour) return NULL;
 	if (m_penColour == wxT("Invisible"))
 		return NULL;
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	m_actualPenObject = wxThePenList->FindOrCreatePen(m_penColour, 1, (wxPenStyle)m_penStyle);
-#else
 	m_actualPenObject = wxThePenList->FindOrCreatePen(m_penColour, 1, m_penStyle);
-#endif
 	return m_actualPenObject;
 }
 

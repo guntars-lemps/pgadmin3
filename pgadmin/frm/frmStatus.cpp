@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //
 // pgAdmin III - PostgreSQL Tools
 //
@@ -611,7 +611,7 @@ void frmStatus::AddStatusPane()
 		if (savedwidth > 0)
 			statusList->SetColumnWidth(col, savedwidth);
 		else
-			statusList->SetColumnWidth(col, 100); //0); 26 July 2021 ABDUL change 0 to 100 as default width
+			statusList->SetColumnWidth(col, 0);
 		statusColWidth[col] = savedwidth;
 
 		// Add new check item on the popup menu
@@ -700,7 +700,7 @@ void frmStatus::AddLockPane()
 		if (savedwidth > 0)
 			lockList->SetColumnWidth(col, savedwidth);
 		else
-			lockList->SetColumnWidth(col, 100); //0); 26 July 2021 ABDUL change 0 to 100 as default width
+			lockList->SetColumnWidth(col, 0);
 		lockColWidth[col] = savedwidth;
 
 		// Add new check item on the popup menu
@@ -800,7 +800,7 @@ void frmStatus::AddXactPane()
 		if (savedwidth > 0)
 			xactList->SetColumnWidth(col, savedwidth);
 		else
-			xactList->SetColumnWidth(col, 100); //0); 26 July 2021 ABDUL change 0 to 100 as default width
+			xactList->SetColumnWidth(col, 0);
 		xactColWidth[col] = savedwidth;
 
 		// Add new check item on the popup menu

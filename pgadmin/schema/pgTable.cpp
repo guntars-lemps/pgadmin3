@@ -1508,7 +1508,7 @@ pgObject *pgTableFactory::CreateObjects(pgCollection *collection, ctlTree *brows
 	pgSet *tables;
 	if (collection->GetConnection()->BackendMinimumVersion(8, 0))
 	{
-		/*ABDUL:BEGIN*/		
+		/*ABDUL:BEGIN*/
 /*		query = wxT("SELECT rel.oid, rel.relname, rel.reltablespace AS spcoid, spc.spcname, pg_get_userbyid(rel.relowner) AS relowner, rel.relacl, rel.relhasoids, ")
 		        wxT("rel.relhassubclass, rel.reltuples, des.description, con.conname, con.conkey,\n")
 		        wxT("       EXISTS(select 1 FROM pg_trigger\n")
@@ -1607,7 +1607,7 @@ pgObject *pgTableFactory::CreateObjects(pgCollection *collection, ctlTree *brows
 /*ABDUL:BEGIN*/
 		/*query += wxT(" WHERE rel.relkind IN ('r','s','t') AND rel.relnamespace = ") + collection->GetSchema()->GetOidStr() + wxT("\n");*/
 		query += wxString::Format( wxT(" WHERE rel.relkind IN (%s) AND rel.relnamespace = "),
-                		collection->GetConnection()->BackendMinimumVersion(11, 0) ? wxT("'r','s','t','p'") : wxT("'r','s','t'")
+                    collection->GetConnection()->BackendMinimumVersion(11, 0) ? wxT("'r','s','t','p'") : wxT("'r','s','t'")
 			) + collection->GetSchema()->GetOidStr() + wxT("\n");
 /*ABDUL:END*/
 		// Greenplum: Eliminate (sub)partitions from the display, only show the parent partitioned table

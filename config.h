@@ -11,7 +11,7 @@
 #define HAVE_ERRNO_H 1
 
 /* Define to 1 if you have the `EVP_aes_128_ctr' function. */
-/* #undef HAVE_EVP_AES_128_CTR */
+#define HAVE_EVP_AES_128_CTR 1
 
 /* Define to 1 if you have the <fcntl.h> header file. */
 #define HAVE_FCNTL_H 1
@@ -38,7 +38,7 @@
 /* #undef HAVE_LIBGCRYPT */
 
 /* Define if you have the ssl library. */
-/* #undef HAVE_LIBSSL */
+#define HAVE_LIBSSL 1
 
 /* Define if you have the z library. */
 #define HAVE_LIBZ 1
@@ -59,7 +59,7 @@
 #define HAVE_NETINET_IN_H 1
 
 /* Compile libssh2 with OpenSSL support */
-/* #undef HAVE_OPENSSL_CRYPTO */
+#define HAVE_OPENSSL_CRYPTO 1
 
 /* use O_NONBLOCK for non-blocking sockets */
 #define HAVE_O_NONBLOCK 1
@@ -125,7 +125,10 @@
 /* #undef LIBSSH2_LIBGCRYPT */
 
 /* Compile libssh2 with OpenSSL support */
-/* #undef LIBSSH2_OPENSSL */
+#define LIBSSH2_OPENSSL 1
+
+/* Define to 1 if your C compiler doesn't accept -c and -o together. */
+/* #undef NO_MINUS_C_MINUS_O */
 
 /* Name of package */
 #define PACKAGE "pgadmin3"

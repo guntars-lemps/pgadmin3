@@ -6,14 +6,6 @@ Codes have been changed to adapt PostgreSQL internal changes up to version 13.1:
 - No more adsrc in pg_attrdef, it should be calculated as pg_catalog.pg_get_expr(adbin, adrelid) instead.
 - Declarative Table Partitioning DDL.
 
-On using wxWidgets version 3.1 or higher
-----------------------------------------
-
-- For wxWidgets 3.0 or less, *.xrc files are moved from ./pgadmin/ui to ./pgadmin/ui/old.
-- For wxWidgets 3.1 or more, *.xrc files are moved from ./pgadmin/ui to ./pgadmin/ui/3.1.
-- For Linux, embed-xrc has been modified to switch the *.xrc directory based on default wxWidgets version. You may tweak the file for manual adjustment.
-- For Windows user, embed-xrc.bat has been modified to switch *.xrc directory to ./pgadmin/ui/old. Please change it to ./pgadmin/ui/3.1 on using wxWidgets 3.1 or higher.
-
 **# pgAdmin3 LTS by BigSQL README #**
 
 This is a fork of the pgAdmin3 project that aims to continue to support 
@@ -50,4 +42,3 @@ $ ./configure --prefix=/opt/pgadmin3bigsql --with-pgsql=/opt/pgsql/12 --with-lib
 $ make
 $ sudo make install
 ```
-

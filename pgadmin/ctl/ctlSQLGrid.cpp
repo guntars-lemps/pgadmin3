@@ -44,14 +44,7 @@ ctlSQLGrid::ctlSQLGrid(wxWindow *parent, wxWindowID id, const wxPoint &pos, cons
 	SetDefaultCellFont(fntCells);
 	// Set labels font
 	wxFont fntLabel(settings->GetSystemFont());
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	fntLabel.SetWeight(wxFONTWEIGHT_BOLD);
-	EnableGridLines(true);
-	SetGridLineColour(*wxLIGHT_GREY);
-#else
 	fntLabel.SetWeight(wxBOLD);
-#endif
 	SetLabelFont(fntLabel);
 	SetColLabelAlignment(wxALIGN_LEFT, wxALIGN_CENTER);
 	SetRowLabelSize(50);
@@ -94,8 +87,9 @@ void ctlSQLGrid::OnMouseWheel(wxMouseEvent &event)
 		SetDefaultCellFont(fontcells);
 		SetColLabelSize(fontlabel.GetPointSize() * 4);
 		SetDefaultRowSize(fontcells.GetPointSize() * 2);
-		for (int index = 0; index < GetNumberCols(); index++)
+		for (int index = 0; index < GetNumberCols(); index++) {
 			SetColSize(index, -1);
+        }
 		ForceRefresh();
 	}
 	else
@@ -333,13 +327,8 @@ void ctlSQLGrid::OnLabelDoubleClick(wxGridEvent &event)
 				HideCellEditControl();
 				SaveEditControlValue();
 			}
-//ABDUL: 30 Aug 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-			SetRowSize(row, extentWant);
-#else
+
 			SetRowHeight(row, extentWant);
-#endif
-//ABDUL: 30 Aug 2021:BEGIN			
 			EndBatch();
 		}
 	}
@@ -379,12 +368,7 @@ void ctlSQLGrid::OnLabelDoubleClick(wxGridEvent &event)
 			extentWant += EXTRAEXTENT_WIDTH;
 			extentWant = wxMax(extentWant, GetColMinimalAcceptableWidth());
 			extentWant = wxMin(extentWant, maxWidth * 3 / 4);
-//ABDUL: 30 Aug 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-			int currentWidth = GetColSize(col);
-#else
 			int currentWidth = GetColumnWidth(col);
-#endif
 
 			if (currentWidth >= maxWidth * 3 / 4 || currentWidth == extentWant)
 				extentWant = GetColMinimalAcceptableWidth();
@@ -403,12 +387,7 @@ void ctlSQLGrid::OnLabelDoubleClick(wxGridEvent &event)
 					HideCellEditControl();
 					SaveEditControlValue();
 				}
-//ABDUL: 30 Aug 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-				SetColSize(col, extentWant);
-#else				
 				SetColumnWidth(col, extentWant);
-#endif
 				EndBatch();
 				colSizes[GetColKeyValue(col)] = extentWant;
 			}
@@ -565,13 +544,11 @@ wxSize ctlSQLGrid::GetBestSize(int row, int col)
 
 	wxGridCellAttr *attr = GetCellAttr(row, col);
 	wxGridCellRenderer *renderer = attr->GetRenderer(this, row, col);
-	if ( renderer )
-	{
+	if (renderer)	{
 		wxClientDC dc(GetGridWindow());
 		size = renderer->GetBestSize(*this, *attr, dc, row, col);
 		renderer->DecRef();
 	}
-
 	attr->DecRef();
 
 	return size;

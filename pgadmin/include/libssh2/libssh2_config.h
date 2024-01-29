@@ -32,7 +32,7 @@
 #define HAVE_ERRNO_H 1
 
 /* Define to 1 if you have the `EVP_aes_128_ctr' function. */
-/* #undef HAVE_EVP_AES_128_CTR */
+#define HAVE_EVP_AES_128_CTR 1
 
 /* Define to 1 if you have the <fcntl.h> header file. */
 #define HAVE_FCNTL_H 1
@@ -56,7 +56,7 @@
 /* #undef HAVE_LIBGCRYPT */
 
 /* Define if you have the ssl library. */
-/* #undef HAVE_LIBSSL */
+#define HAVE_LIBSSL 1
 
 /* Define if you have the z library. */
 #define HAVE_LIBZ 1

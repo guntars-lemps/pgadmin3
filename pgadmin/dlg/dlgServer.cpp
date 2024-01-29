@@ -503,7 +503,7 @@ int dlgServer::Go(bool modal)
 		pickerIdentityFile->SetPath(server->GetIdentityFile());
 #endif
 		stPassword->Disable();
-		txtPassword->Disable();
+
 		if (connection)
 		{
 			txtHostAddr->Disable();
@@ -526,6 +526,7 @@ int dlgServer::Go(bool modal)
 			pickerSSLRootCert->Disable();
 			pickerSSLCrl->Disable();
 			chkSSLCompression->Disable();
+			txtPassword->Disable();
 			EnableOK(false);
 #if defined(HAVE_OPENSSL_CRYPTO) || defined(HAVE_GCRYPT)
 			chkSSHTunnel->Enable(false);

@@ -1,0 +1,3 @@
+./configure --with-wx-version=3.2 --enable-appbundle --with-arch-arm64
+
+./configure --with-wx-version=3.2 --enable-appbundle --with-pgsql=/opt/homebrew/Cellar/postgresql@11/11.22/

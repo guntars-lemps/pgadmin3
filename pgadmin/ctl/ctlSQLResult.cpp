@@ -201,7 +201,6 @@ void ctlSQLResult::DisplayData(bool single)
 	else
 	{
 		long col, nCols = thread->DataSet()->NumCols();
-
 		AutoSizeColumns(false);
 
 		for (col = 0 ; col < nCols ; col++)
@@ -218,7 +217,7 @@ void ctlSQLResult::DisplayData(bool single)
 				wxGridCellAttr *attr = new wxGridCellAttr();
 				attr->SetAlignment(wxALIGN_RIGHT, wxALIGN_TOP);
 				SetColAttr(col, attr);
-			}
+		 	}
 		}
 	}
 	Thaw();
@@ -314,57 +313,53 @@ void ctlSQLResult::OnGridSelect(wxGridRangeSelectEvent &event)
 
 wxString sqlResultTable::GetValue(int row, int col)
 {
-	if (thread && thread->DataValid())
-	{
-		if (col >= 0)
-		{
+	if (thread && thread->DataValid()) {
+		if (col >= 0) {
 			thread->DataSet()->Locate(row + 1);
-			if (settings->GetIndicateNull() && thread->DataSet()->IsNull(col))
-				return wxT("<NULL>");
-			else
-			{
+			if (settings->GetIndicateNull() && thread->DataSet()->IsNull(col)) {
+				return "<NULL>";
+			} else {
 
-				wxString decimalMark = wxT(".");
-				wxString s = thread->DataSet()->GetVal(col);
+                if (thread->DataSet()->ColTypClass(col) == PGTYPCLASS_NUMERIC) {
 
-				if(thread->DataSet()->ColTypClass(col) == PGTYPCLASS_NUMERIC &&
-				        settings->GetDecimalMark().Length() > 0)
-				{
-					decimalMark = settings->GetDecimalMark();
-					s.Replace(wxT("."), decimalMark);
+					wxString decimalMark = ".";
+					wxString s = thread->DataSet()->GetVal(col);
 
-				}
-				if (thread->DataSet()->ColTypClass(col) == PGTYPCLASS_NUMERIC &&
-				        settings->GetThousandsSeparator().Length() > 0)
-				{
-					/* Add thousands separator */
-					size_t pos = s.find(decimalMark);
-					if (pos == wxString::npos)
-						pos = s.length();
-					while (pos > 3)
-					{
-						pos -= 3;
-						if (pos > 1 || !s.StartsWith(wxT("-")))
-							s.insert(pos, settings->GetThousandsSeparator());
+					if (settings->GetDecimalMark().Length() > 0) {
+						decimalMark = settings->GetDecimalMark();
+						s.Replace(".", decimalMark);
+					}
+
+					if (settings->GetThousandsSeparator().Length() > 0) {
+						size_t pos = s.find(decimalMark);
+						if (pos == wxString::npos) {
+							pos = s.length();
+						}
+						while (pos > 3) {
+							pos -= 3;
+							if (pos > 1 || !s.StartsWith("-")) {
+								s.insert(pos, settings->GetThousandsSeparator());
+						    }
+						}
 					}
 					return s;
-				}
-				else
-				{
+				} else {
 					wxString data = thread->DataSet()->GetVal(col);
 
-					if (data.Length() > (size_t)settings->GetMaxColSize())
-						return thread->DataSet()->GetVal(col).Left(settings->GetMaxColSize()) + wxT(" (...)");
-					else
+					if (data.Length() > (size_t)settings->GetMaxColSize()) {
+						return thread->DataSet()->GetVal(col).Left(settings->GetMaxColSize()) + " (...)";
+					} else {
 						return thread->DataSet()->GetVal(col);
+				    }
 				}
 			}
-		}
-		else
+		} else {
 			return thread->DataSet()->ColName(col);
+	    }
 	}
 	return wxEmptyString;
 }
+
 
 sqlResultTable::sqlResultTable()
 {

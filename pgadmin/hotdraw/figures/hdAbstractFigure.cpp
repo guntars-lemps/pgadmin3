@@ -56,12 +56,7 @@ void hdAbstractFigure::basicDraw(wxBufferedDC &context, hdDrawingView *view)
 	view->CalcScrolledPosition(copy.x, copy.y, &copy.x, &copy.y);
 
 	context.SetPen(*wxGREEN_PEN);
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	context.SetBrush(wxBrush (wxColour(208, 208, 208), wxBRUSHSTYLE_SOLID));
-#else
 	context.SetBrush(wxBrush (wxColour(208, 208, 208), wxSOLID));
-#endif
 	context.DrawRectangle(copy);
 }
 
@@ -77,12 +72,7 @@ void hdAbstractFigure::basicDrawSelected(wxBufferedDC &context, hdDrawingView *v
 	view->CalcScrolledPosition(copy.x, copy.y, &copy.x, &copy.y);
 
 	context.SetPen(*wxRED_PEN);
-//ABDUL: 4 Sep 2021:BEGIN
-#if wxCHECK_VERSION(3, 1, 0)
-	context.SetBrush(wxBrush (wxColour(133, 133, 133), wxBRUSHSTYLE_SOLID));
-#else
 	context.SetBrush(wxBrush (wxColour(133, 133, 133), wxSOLID));
-#endif
 	context.DrawRectangle(copy);
 }
 

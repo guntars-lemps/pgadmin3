@@ -571,14 +571,14 @@ bool pgServer::GetPasswordIsStored()
 {
 	wxString fname = passwordFilename();
 
-
-	if (!wxFile::Exists(fname))
+	if (!wxFile::Exists(fname)) {
 		return false;
+	}
 
 	wxUtfFile file(fname, wxFile::read, wxFONTENCODING_SYSTEM);
 
-	if (file.IsOpened())
-	{
+	if (file.IsOpened()) {
+
 		wxString before;
 		file.Read(before);
 
@@ -595,20 +595,25 @@ bool pgServer::GetPasswordIsStored()
 		while (lines.HasMoreTokens())
 		{
 			wxString str = lines.GetNextToken();
-			if (str.Left(seekStr.Length()) == seekStr)
-				return true;
 
-			if (str.Left(seekStr2.Length()) == seekStr2)
+			if (str.Left(seekStr.Length()) == seekStr) {
+				iSetPassword(str.SubString(seekStr.Length(), str.Length()));
 				return true;
+		    }
+
+			if (str.Left(seekStr2.Length()) == seekStr2) {
+				iSetPassword(str.SubString(seekStr.Length(), str.Length()));
+				return true;
+		    }
 		}
 	}
-
 	return false;
 }
 
 
 void pgServer::StorePassword()
 {
+
 	wxString fname = passwordFilename();
 
 	if (!wxFile::Exists(fname))
@@ -679,6 +684,8 @@ void pgServer::StorePassword()
 }
 
 
+
+// caur pwd atgriezh paroli, neviens nepadod !
 int pgServer::Connect(frmMain *form, bool askPassword, const wxString &pwd, bool forceStorePassword, bool askTunnelPassword)
 {
 	wxLogInfo(wxT("Attempting to create a connection object..."));
@@ -694,13 +701,12 @@ int pgServer::Connect(frmMain *form, bool askPassword, const wxString &pwd, bool
 		}
 		if (askPassword)
 		{
-			if ((sshTunnel || !passwordValid || !GetPasswordIsStored() || !GetStorePwd()) && GetSSLCert() == wxEmptyString)
-			{
+			if ((sshTunnel || !passwordValid || !GetPasswordIsStored() || !GetStorePwd()) && (GetSSLCert() == wxEmptyString)) {
 				wxString txt;
 				txt.Printf(_("Please enter password for user %s\non server %s (%s)"), username.c_str(), description.c_str(), GetName().c_str());
 				dlgConnect *dlg = NULL;
 				// if sshTunnel is true then we have to hide 'Stored Password' option
-				if(sshTunnel)
+				if (sshTunnel)
 					dlg = new dlgConnect(NULL, txt, false);
 				else
 					dlg = new dlgConnect(form, txt, GetStorePwd());
@@ -740,9 +746,10 @@ int pgServer::Connect(frmMain *form, bool askPassword, const wxString &pwd, bool
 					dlg = NULL;
 				}
 			}
-		}
-		else
-			iSetPassword(pwd);
+		} else {
+			// vienkāŗši piršķir password = pwd
+		    iSetPassword(pwd);
+	    }
 
 		form->StartMsg(_("Connecting to database"));
 
@@ -786,9 +793,9 @@ int pgServer::Connect(frmMain *form, bool askPassword, const wxString &pwd, bool
 				}
 			}
 			// Create SSH Tunnel if required
-			if(!tunnelObj)
+			if (!tunnelObj)
 			{
-				if(!createSSHTunnel())
+				if (!createSSHTunnel())
 				{
 					form->EndMsg(false);
 					return PGCONN_SSHTUNNEL_ERROR;
@@ -1916,7 +1923,7 @@ static pgaCollectionFactory cf(&serverFactory, __("Servers"), servers_png_img);
 addServerFactory::addServerFactory(menuFactoryList *list, wxMenu *mnu, ctlMenuToolbar *toolbar) : actionFactory(list)
 {
 	mnu->Append(id, _("&Add Server..."), _("Add a connection to a server."));
-	toolbar->AddTool(id, _("Add Server"), *connect_png_bmp, _("Add a connection to a server."), wxITEM_NORMAL);
+	toolbar->AddTool(id, wxT("Add Server"), *connect_png_bmp, wxT("Add a connection to a server."), wxITEM_NORMAL);
 }
 
 
@@ -1943,7 +1950,6 @@ wxWindow *addServerFactory::StartDialog(frmMain *form, pgObject *obj)
 			wxSafeYield();
 			wxMilliSleep(100);
 			wxSafeYield();
-
 			rc = server->Connect(form, false, dlg.GetPassword(), true);
 		}
 		else

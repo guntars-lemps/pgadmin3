@@ -155,22 +155,22 @@ frmDatabaseDesigner::frmDatabaseDesigner(frmMain *form, const wxString &_title, 
 	// Set toolbar
 	toolBar = new ctlMenuToolbar(this, -1, wxDefaultPosition, wxDefaultSize, wxTB_FLAT | wxTB_NODIVIDER);
 	toolBar->SetToolBitmapSize(wxSize(16, 16));
-	toolBar->AddTool(MNU_NEW, _("New Model"), *file_new_png_bmp, _("Create new model"), wxITEM_NORMAL);
-	toolBar->AddTool(MNU_NEWDIAGRAM, _("New Diagram"), *ddnewdiagram_png_bmp, _("Add new diagram"), wxITEM_NORMAL);
+	toolBar->AddTool(MNU_NEW, wxT("New Model"), *file_new_png_bmp, wxT("Create new model"));
+	toolBar->AddTool(MNU_NEWDIAGRAM, wxT("New Diagram"), *ddnewdiagram_png_bmp, wxT("Add new diagram"));
 	toolBar->AddSeparator();
-	toolBar->AddTool(MNU_LOADMODEL, _("Open Model"), *file_open_png_bmp, _("Open existing model"), wxITEM_NORMAL);
-	toolBar->AddTool(MNU_SAVEMODEL, _("Save Model"), *file_save_png_bmp, _("Save current model"), wxITEM_NORMAL);
+	toolBar->AddTool(MNU_LOADMODEL, wxT("Open Model"), *file_open_png_bmp, wxT("Open existing model"));
+	toolBar->AddTool(MNU_SAVEMODEL, wxT("Save Model"), *file_save_png_bmp, wxT("Save current model"));
 	toolBar->AddSeparator();
-	toolBar->AddTool(MNU_ADDTABLE, _("Add Table"), *table_png_bmp, _("Add empty table to the current model"), wxITEM_NORMAL);
-	toolBar->AddTool(MNU_DELETETABLE, _("Delete Table"), wxBitmap(*ddRemoveTable2_png_img), _("Delete selected table"), wxITEM_NORMAL);
-	toolBar->AddTool(MNU_ADDCOLUMN, _("Add Column"), *table_png_bmp, _("Add new column to the selected table"), wxITEM_NORMAL);
+	toolBar->AddTool(MNU_ADDTABLE, wxT("Add Table"), *table_png_bmp, wxT("Add empty table to the current model"));
+	toolBar->AddTool(MNU_DELETETABLE, wxT("Delete Table"), wxBitmap(*ddRemoveTable2_png_img), wxT("Delete selected table"));
+	toolBar->AddTool(MNU_ADDCOLUMN, wxT("Add Column"), *table_png_bmp, wxT("Add new column to the selected table"));
 	toolBar->AddSeparator();
-	toolBar->AddTool(MNU_GENERATEMODEL, _("Generate Model"), *continue_png_bmp, _("Generate SQL for the current model"), wxITEM_NORMAL);
-	toolBar->AddTool(MNU_GENERATEDIAGRAM, _("Generate Diagram"), *ddgendiagram_png_bmp, _("Generate SQL for the current diagram"), wxITEM_NORMAL);
+	toolBar->AddTool(MNU_GENERATEMODEL, wxT("Generate Model"), *continue_png_bmp, wxT("Generate SQL for the current model"));
+	toolBar->AddTool(MNU_GENERATEDIAGRAM, wxT("Generate Diagram"), *ddgendiagram_png_bmp, wxT("Generate SQL for the current diagram"));
 	toolBar->AddSeparator();
-	toolBar->AddTool(CTL_IMPSCHEMA, _("Import Tables from database..."), *conversion_png_ico, _("Import tables from database schema to database designer model"), wxITEM_NORMAL);
+	toolBar->AddTool(CTL_IMPSCHEMA, wxT("Import Tables from database..."), *conversion_png_ico, wxT("Import tables from database schema to database designer model"));
 	toolBar->AddSeparator();
-	toolBar->AddTool(MNU_HELP, _("Help"), *help_png_bmp, _("Display help"), wxITEM_NORMAL);
+	toolBar->AddTool(MNU_HELP, wxT("Help"), *help_png_bmp, wxT("Display help"));
 	toolBar->Realize();
 
 	// Create notebook for diagrams
@@ -196,7 +196,7 @@ frmDatabaseDesigner::frmDatabaseDesigner(frmMain *form, const wxString &_title, 
 	browserSizer->SetSizeHints(browserPanel);
 
 	// Add view to notebook
-	diagrams->AddPage(design->createDiagram(diagrams, _("unnamed"), false)->getView(), _("unnamed"));
+	diagrams->AddPage(design->createDiagram(diagrams, wxT("unnamed"), false)->getView(), wxT("unnamed"));
 
 
 	// Add the database selection bar and schema selector
@@ -916,7 +916,7 @@ wxWindow *databaseDesignerBaseFactory::StartDialogDesigner(frmMain *form, pgObje
 databaseDesignerFactory::databaseDesignerFactory(menuFactoryList *list, wxMenu *mnu, ctlMenuToolbar *toolbar) : databaseDesignerBaseFactory(list)
 {
 	mnu->Append(id, _("&Database Designer\tCtrl-F"), _("Create database designs"));
-	toolbar->AddTool(id, _("Database Designer\tCtrl-F"), wxBitmap(*ddmodel_32_png_img), _("Create database designs."), wxITEM_NORMAL);
+	toolbar->AddTool(id, wxT("Database Designer\tCtrl-F"), wxBitmap(*ddmodel_32_png_img), wxT("Create database designs."));
 }
 
 

@@ -134,8 +134,8 @@ void pgSequence::UpdateValues()
 			nextValue = lastValue;
 
 		delete sequence;
-	}*/		
-	pgSet *sequence = NULL;	
+	}*/
+	pgSet *sequence = NULL;
 	if (GetConnection()->BackendMinimumVersion(10, 0)) {
 		sequence = ExecuteSet(
 			wxString::Format(
@@ -151,7 +151,7 @@ void pgSequence::UpdateValues()
 	{
 		sequence = ExecuteSet(
 			wxT("SELECT last_value, min_value, max_value, cache_value, is_cycled, increment_by, is_called\n")
-			wxT("  FROM ") + GetQuotedFullIdentifier());	
+			wxT("  FROM ") + GetQuotedFullIdentifier());
 	}
 	if (sequence)
 	{
@@ -168,7 +168,7 @@ void pgSequence::UpdateValues()
 			nextValue = lastValue;
 
 		delete sequence;
-	}			
+	}
 	/*ABDUL:END*/
 }
 
