@@ -1,10 +1,23 @@
 **# README by Datatrans #**
 
+This is version contains fixes fro Apple MacOS with M2 chipset (Build tested upto Sonoma 14.1 version)
+- include fixes for VxWidgets 3.2
+- fixes for arm64 architecture
+  
+Typical configure & build for M2 MacOS
+--------------------------------------
+```
+$ ./configure --with-wx-version=3.2  --with-arch-arm64 --enable-appbundle --with-pgsql=<path to postgres> --with-libssl-prefix=<path to openssl lib>
+$ make
+$ sudo make install
+```
+
 Codes have been changed to adapt PostgreSQL internal changes up to version 13.1:
 - No more relhasoids in pg_class.
 - No more cache_value, is_cycled, is_called in sequence object (since PostgreSQL 11).
 - No more adsrc in pg_attrdef, it should be calculated as pg_catalog.pg_get_expr(adbin, adrelid) instead.
 - Declarative Table Partitioning DDL.
+
 
 **# pgAdmin3 LTS by BigSQL README #**
 
@@ -34,11 +47,3 @@ additional drivers are required to communicate with the database server.
 
 pgAdmin3 is Free Software released under the PostgreSQL License.
 
-Typical configure option
-------------------------
-```
-$ bash bootstrap
-$ ./configure --prefix=/opt/pgadmin3bigsql --with-pgsql=/opt/pgsql/12 --with-libgcrypt CFLAGS=-fPIC CXXFLAGS=-fPIC
-$ make
-$ sudo make install
-```
