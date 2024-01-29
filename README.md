@@ -2,7 +2,7 @@
 
 This is version contains fixes fro Apple MacOS with M2 chipset (Build tested upto Sonoma 14.1 version)
 - include fixes for VxWidgets 3.2
-- fixes for arm64 architecture
+- include fix for arm64 architecture
   
 **Typical configure & build for M2 MacOS**
 ```
