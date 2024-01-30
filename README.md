@@ -1,6 +1,6 @@
 **# README by Datatrans #**
 
-This version contains fixes fro Apple MacOS with M2 chipset (Build tested upto Sonoma 14.1 version)
+This version contains fixes fro Apple MacOS with M2 chipset (Build tested on Sonoma 14.1 version)
 - includes fixes for VxWidgets 3.2
 - includes fix for arm64 architecture
   
